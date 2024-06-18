@@ -1,0 +1,8 @@
+rm(list = ls())
+library(forecast)
+par(mfcol = c(3,1))
+plot(discoveries, main='Number of Discoveries in a Year')
+#stripchart(discoveries, method='stack', offset=0.5, at=1.5, pch=19, main='Num of Discoveries Dotplot', xlab='Num of Discoveries in a Year', ylab='Frequency')
+acf(discoveries, main='ACF')
+acf(discoveries, type='partial', main='PACF')
+print(auto.arima(discoveries))
