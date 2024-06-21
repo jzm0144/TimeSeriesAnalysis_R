@@ -14,7 +14,7 @@ print(summary(jj))
 plot(jj, main='Johnson Johnson Earning Data (Quarterly)', xlab='Years', type='o', col='red')
 
 
-# Neumonia and Flu Datset
+# Neumonia and Flu Dataset
 data = flu
 plot(data, main='Neuomnia and Flu Deaths/10000 (Monthly)', xlab='Months', type='o', col='red')
 
