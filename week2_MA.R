@@ -35,8 +35,8 @@ for(i in 6:N){
 
 
 
-
-par(mfrow=c(4,2))
+# make a figure with 4x2 plots in it and sides have a margin of 2
+par(mfrow=c(4,2), oma=c(0,1,1,1))
 # Cut the first few readings
 MA2 = ma2[3:N]
 MA3 = ma3[4:N]
@@ -54,5 +54,5 @@ acf(ts(MA4), type='correlation', main='ACF (Corr)', col='red')
 
 plot(ts(MA5), main='MA5 TimeSeries', xlab='time', ylab='value',col='red')
 acf(ts(MA5), type='correlation', main='ACF (Corr)', col='red')
-title("Spikes of ACF show Order of MA process", line = -1, outer = TRUE)
+title("Spikes of ACF show Order of MA process", line = -1, outer = TRUE, font.main=2, cex.main=1.7)
 
