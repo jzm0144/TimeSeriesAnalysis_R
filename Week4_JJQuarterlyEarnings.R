@@ -1,3 +1,10 @@
+# Remove all variables from the RStudio Memory
+rm(list = ls())
+# Remove all visuals from the RStudio Memory
+try(dev.off())
+# Clear the R console by running CTRL+L or writing the below command
+cat("\014")
+
 # Time plot for Johnson&Johnson
 plot(JohnsonJohnson, main='Johnson&Johnosn earnings per share', col='blue', lwd=3)
 
