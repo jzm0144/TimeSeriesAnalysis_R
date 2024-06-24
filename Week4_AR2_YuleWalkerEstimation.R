@@ -1,9 +1,10 @@
-# Simulation of AR2 Process
-
-#
+# Remove all variables from the RStudio Memory
 rm(list = ls())
+# Remove all visuals from the RStudio Memory
+try(dev.off())
+
 # Set the seed, so we can reproduce same dataset
-#set.seed(2024)
+set.seed(2024)
 
 # Model Parameters (we will estimate them using Yule Walker's wonderful work)
 sigma = 4
@@ -55,9 +56,9 @@ print(varHat)
 
 # Let's do some Plotting
 par( mfrow=c(3,1) )
-plot(ar_process)
-acf(ar_process)
-acf(ar_process, type='partial')
+plot(ar_process, main='AR2 Process')
+acf(ar_process, main='ACF of AR Process')
+acf(ar_process, type='partial', main='PACF of AR Process')
 
 
 
