@@ -1,10 +1,16 @@
+# Remove all variables from the RStudio Memory
 rm(list = ls())
+# Remove all visuals from the RStudio Memory
+try(dev.off())
+# Clear the R console by running CTRL+L or writing the below command
+cat("\014")
+
 library(tsdl)
 library(forecast)
 library(astsa)
-
-# Follow this Guideline
-######################
+############################################################
+#                 Follow this Guideline                    #
+############################################################
 # Trend Suggest Differencing
 # Variation in Variance  suggests Transformation
 # Common Transformation: Log, then Differencing (also called log-return)
@@ -24,9 +30,9 @@ num_of_births = Data$Births
 #Data$Date = as.Date(Data$Date, format="%m/%d/%Y")
 birthday = Data$Date
 
-par(mfcol = c(3,1))
-plot(num_of_births ~ as.Date(birthday), main='Female Birth Count', type='l',xlab='Date')
-hist(num_of_births, main='Histogram',xlab='Number of Births')
+par(mfcol = c(4,2), oma=c(0,1,1,1))
+plot(num_of_births ~ as.Date(birthday), ylab='Female Birth Count', type='l',xlab='Date')
+hist(num_of_births, main='',xlab='Number of Births')
 
 
 # Applying in the Box-Pierce Test to look for Correlation
@@ -36,21 +42,22 @@ print(x) # this will return a p < 0.05 that mean there is autocorrelation with t
 
 
 # Now plot the differenced Data
-plot.ts(diff(num_of_births), main='Differenced Series')
+plot.ts(diff(num_of_births),ylab='Differenced Series')
+hist(diff(num_of_births), main='',xlab='Diff(Number of Births)')
 # Apply Box Test on Differenced Data
 y = Box.test(diff(num_of_births), lag = log(length(diff(num_of_births))))
 print(y)
 
-
-par(mfcol = c(2,2))
-acf(num_of_births, main='ACF of Data', 50)
-pacf(num_of_births, main='PACF of Data', 50)
+acf(num_of_births, ylab='ACF of Data', 50, main='')
+pacf(num_of_births, ylab='PACF of Data', 50, main='')
 # acf and pacf of the differenced data
-acf(diff(num_of_births), main='ACF of differenced data', 50)
-pacf(diff(num_of_births), main='PACF of differenced data', 50)
+acf(diff(num_of_births), ylab='ACF of Diff(Data)', 50, main='')
+pacf(diff(num_of_births), ylab='PACF of Diff(Data)', 50, main='')
+title("Pre-Differencing & Post-Differencing a TimeSeries", line = -1, outer = TRUE, font.main=2, cex.main=1.7)
+
 # With this plot the differenced series looks easier to model
 
-# Now let's try to build an ARIMA Model for the given Differnced Data
+# Now let's try to build an ARIMA Model for the given Diff(Data)
 X = num_of_births
 XD = diff(num_of_births)
 model1 <- arima(X, order=c(0, 1, 1))
@@ -77,15 +84,3 @@ colnames(df)<-c('Arima(0,1,1)','Arima(0,1,2)', 'Arima(7,1,1)', 'Arima(7,1,2)')
 #
 
 print(format(df, scientific=FALSE))
-
-
-
-# Fit a Sarima Model
-# Fit a SARIMA model
-
-sarima(X, 7,1,2,0,0,0)
-
-
-
-
-

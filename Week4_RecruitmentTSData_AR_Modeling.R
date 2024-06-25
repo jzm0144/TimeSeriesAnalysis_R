@@ -1,3 +1,8 @@
+# Remove all variables from the RStudio Memory
+rm(list = ls())
+# Remove all visuals from the RStudio Memory
+try(dev.off())
+
 # Modeling Recruitment Time Series from astsa package as an AR process
 library(astsa)
 data = rec
