@@ -32,8 +32,8 @@ forecast2=predict(arimaModel_2, 10)
 forecast3=predict(arimaModel_3, 10)
 
 print(mean(abs(test_series - forecast1$pred)))
-print(mean(abs(test_series - forecast2$pred))) # This model is better.
-print(mean(abs(test_series - forecast3$pred)))
+print(mean(abs(test_series - forecast2$pred))) 
+print(mean(abs(test_series - forecast3$pred))) # This is the good model among the three
 
 
 
